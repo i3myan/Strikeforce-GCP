@@ -1,0 +1,21 @@
+
+.table > tbody > tr > td {
+  vertical-align: middle;
+}
+
+table {
+  width: 100%;
+}
+
+.mat-header-cell {
+  color: black;
+  font-weight:bold;
+  font-size:14px;
+}
+
+.example-container {
+  height: 100%;
+  max-width: 100%;
+  overflow: auto;
+}
+

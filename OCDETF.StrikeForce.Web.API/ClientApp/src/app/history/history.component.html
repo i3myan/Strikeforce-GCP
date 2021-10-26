@@ -1,0 +1,26 @@
+<div class="card card-dark">
+  <div class="section-header">History</div>
+
+  <div class="card-body">
+    <div class="row mb-3">
+      <label for="inputBeginOperations" class="col-md-3 col-lg-2 col-form-label">Beginning of Operations:</label>
+      <div class="col-md-8">
+        <input type="text" class="form-control" id="inputBeginOperations" [(ngModel)]="currentReport.OperationsBegin">
+      </div>
+    </div>
+    <div class="row mb-3">
+      <label for="inputDateMOU" class="col-md-3 col-lg-2 col-form-label">Date of MOU:</label>
+      <div class="col-md-8">
+        <input type="text" class="form-control" id="inputDateMOU" [(ngModel)]="currentReport.MOUDate">
+      </div>
+    </div>
+    <div class="row mb-3">
+      <label for="inputNotes" class="col-md-3 col-lg-2 col-form-label">Notes:</label>
+      <div class="col-md-8">
+        <textarea class="form-control" id="inputNotes" rows="5" cols="100" [(ngModel)]="currentReport.HistoryNotes"></textarea>
+      </div>
+    </div>
+  </div>
+
+</div>
+

@@ -1,0 +1,72 @@
+<div class="row mt-3">
+  <div class="col-md-2">
+
+  </div>
+  <div class="col-md-8">
+    <div class="row">
+      <div class="col-md-12 text-end">
+        <button type="button" class="btn  btn-primary" (click)="createNewReport()"><i class="far fa-file-alt"></i>&nbsp; Start New Quarterly Report</button>
+        
+      </div>
+    </div>
+
+    <div class="card mt-3">
+      <h4 class="card-header text-white bg-secondary">My Quarterly Reports</h4>
+      <div class="card-body">
+        <div class="example-container mat-elevation-z8">
+          <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+
+            <ng-container matColumnDef="Name">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header sticky> Report Name </th>
+              <td mat-cell *matCellDef="let row"> {{row.Name}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="StrikeForceName">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header sticky> Strike Force </th>
+              <td mat-cell *matCellDef="let row"> {{row.StrikeForceName}}  </td>
+            </ng-container>
+
+            <ng-container matColumnDef="FiscalYear">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Fiscal Year </th>
+              <td mat-cell *matCellDef="let row"> {{row.FiscalYear }} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="Quarter">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Quarter </th>
+              <td mat-cell *matCellDef="let row"> {{row.Quarter | number}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="Status">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
+              <td mat-cell *matCellDef="let row"> {{row.Status}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="IsActive">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Active </th>
+              <td mat-cell *matCellDef="let row"> {{row.IsActive ? "Y" :"N"}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="Delete">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Action(s) </th>
+              <td mat-cell *matCellDef="let row"><button type="button" class="btn btn-link" (click)="viewReport(row)">View</button>|<button type="button" class="btn btn-link" (click)="deleteReport(row)">Delete</button>|<button type="button" class="btn btn-link" (click)="printReport(row)">Print Preview</button> </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+
+          </table>
+          <mat-paginator [pageSizeOptions]="[10, 15, 20]" showFirstLastButtons></mat-paginator>
+        </div>        
+      </div>
+    </div>
+  </div>
+  <div class="col-md-2">
+
+  </div>
+</div>
+
+
+
+
+

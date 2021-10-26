@@ -1,0 +1,313 @@
+<div class="row">
+  <div class="col-md-1"></div>
+  <div class="col-md-10 ">
+    <div class="row mb-3">
+      <div class="col-md-6 text-start">
+        <button type="button" class="btn btn-dark" (click)="backTo()"><i class="fas fa-arrow-left"></i> Go Back </button>&nbsp;&nbsp;&nbsp;
+      </div>
+      <div class="col-md-6 text-begin">
+        <div class="input-group mb-3">
+          <label class="input-group-text" for="inputGroupSelect01">Report(s)</label>
+          <select class="form-select" id="inputGroupSelect01" [(ngModel)]="selectReportID" (change)="onChange()">
+            <option *ngFor="let report of myReports" [value]="report.ID">{{report.Name}}</option>
+          </select>
+        </div>
+      </div>
+    </div>    
+  </div>
+  <div class="col-md-1"></div>
+</div>
+<div class="row mb-3">
+  <div class="col-md-1"></div>
+  <div class="col-md-10">
+    <div class="card">
+      <div class="section-header">{{currentReport.Name}} (FY {{currentReport.FiscalYear}} - Q{{currentReport.Quarter}}) - {{currentReport.StrikeForceName}}</div>
+
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-3 text-start">
+            <b>History:</b>
+          </div>
+          <div class="col-md-9 text-start">
+            Beginning of Operations: {{ this.currentReport.OperationsBegin}}<br />
+            Beginning of Operations: {{ this.currentReport.MOUDate }}<br />
+            History Notes: {{ this.currentReport.HistoryNotes}}<br />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <hr />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-3 text-start">
+            <b>Mission:</b>
+          </div>
+          <div class="col-md-9 text-start">
+            {{this.currentReport.Mission}}
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <hr />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-3 text-start">
+            <b>Structure:</b>
+          </div>
+          <div class="col-md-9 text-start">
+            {{this.currentReport.Structure}}
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <hr />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-3 text-start">
+            <b>Office Locations:</b>
+          </div>
+          <div class="col-md-9 text-start">
+            {{this.currentReport.OfficeLocations}}
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <hr />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-3 text-start">
+            <b>Staffing: </b>
+          </div>
+          <div class="col-md-9 text-start">
+            <table class="table table-sm table-striped mt-3">
+              <thead>
+                <tr>
+                  <th scope="col">Agency</th>
+                  <th scope="col"># Agents</th>
+                  <th scope="col"># Federal Agency TFOs</th>
+                  <th scope="col"># Analysts</th>
+                  <th scope="col"># Other</th>
+                  <th scope="col"> Total for Agency</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let row of this.currentReport.StaffingData">
+                  <td> {{row.AgencyName}}</td>
+                  <td> {{row.NumberOfAgents}}</td>
+                  <td> {{row.NumberOfFederalTFOs}}</td>
+                  <td> {{row.NumberOfAnalysts}}</td>
+                  <td> {{row.OtherNumbers}}</td>
+                  <td> {{row.Total}}</td>
+                </tr>
+                <tr *ngIf="!this.currentReport.StaffingData || this.currentReport.StaffingData.length>0">
+                  <td></td>
+                  <td><b>{{this.totalAgents}}</b></td>
+                  <td><b>{{this.totalFederal}}</b></td>
+                  <td><b>{{this.totalAnalysts}}</b></td>
+                  <td><b>{{this.totalOther}}</b></td>
+                  <td><b>{{this.totalAgency}}</b></td>
+                </tr>
+                <tr *ngIf="!this.currentReport.StaffingData || this.currentReport.StaffingData.length==0">
+                  <td colspan="5">
+                    No Staffing Data to display!
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <hr />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-3 text-start">
+            <b>Required Information (OCDETF and non-OCDETF cases):</b>
+          </div>
+          <div class="col-md-9 text-start">
+            <table class="table table-sm table-striped mb-5">
+              <thead>
+                <tr>
+                  <th scope="col"> </th>
+                  <th scope="col">1st Quarter</th>
+                  <th scope="col">2nd Quarter</th>
+                  <th scope="col">3rd Quarter</th>
+                  <th scope="col">4th Quarter</th>
+                  <th scope="col">Total</th>
+
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let row of this.currentReport.RequiredData">
+                  <td>{{row.ActivityName}}</td>
+                  <td>{{row.FirstQuarter}}</td>
+                  <td>{{row.SecondQuarter}}</td>
+                  <td>{{row.ThirdQuarter}}</td>
+                  <td>{{row.FourthQuarter}}</td>
+                  <td>{{row.Total}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <hr />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-3 text-start">
+            <b>OCDETF cases only (data supplied by OCDETF  Executive Office)*:</b>
+          </div>
+          <div class="col-md-9 text-start">
+            <table class="table table-sm table-striped mb-5">
+              <thead>
+                <tr>
+                  <th scope="col"> </th>
+                  <th scope="col">1st Quarter</th>
+                  <th scope="col">2nd Quarter</th>
+                  <th scope="col">3rd Quarter</th>
+                  <th scope="col">4th Quarter</th>
+                  <th scope="col">Total</th>
+
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let row of this.currentReport.OCDETFCases">
+                  <td>{{row.ActivityName}}</td>
+                  <td>{{row.FirstQuarter}}</td>
+                  <td>{{row.SecondQuarter}}</td>
+                  <td>{{row.ThirdQuarter}}</td>
+                  <td>{{row.FourthQuarter}}</td>
+                  <td>{{row.Total}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <hr />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-3 text-start">
+            <b>Seizures:</b>
+          </div>
+          <div class="col-md-9 text-start">
+            <table class="table table-sm table-striped">
+              <thead>
+                <tr>
+                  <th scope="col"> </th>
+                  <th scope="col">1st Quarter</th>
+                  <th scope="col">2nd Quarter</th>
+                  <th scope="col">3rd Quarter</th>
+                  <th scope="col">4th Quarter</th>
+                  <th scope="col">Total</th>
+
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let row of this.currentReport.SeizuresData">
+                  <td>{{row.ActivityName}}</td>
+                  <td>{{row.FirstQuarter | number }}</td>
+                  <td>{{row.SecondQuarter | number }}</td>
+                  <td>{{row.ThirdQuarter | number }}</td>
+                  <td>{{row.FourthQuarter | number }}</td>
+                  <td>{{row.Total | number }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-3 text-start">
+            <b>Seizure Notes:</b>
+          </div>
+          <div class="col-md-9 text-start">
+            {{this.currentReport.SeizureNotes}}
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <hr />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-3 text-start">
+            <b>Specific information (OCDETF and non-OCDETF cases):</b>
+          </div>
+
+          <div class="col-md-9 text-start">
+            <table class="table table-sm table-striped mb-5">
+              <thead>
+                <tr>
+                  <th scope="col"> </th>
+                  <th scope="col">1st Quarter</th>
+                  <th scope="col">2nd Quarter</th>
+                  <th scope="col">3rd Quarter</th>
+                  <th scope="col">4th Quarter</th>
+                  <th scope="col">Total</th>
+
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let row of this.currentReport.SpecificData">
+                  <td>{{row.ActivityName}}</td>
+                  <td>{{row.FirstQuarter}}</td>
+                  <td>{{row.SecondQuarter}}</td>
+                  <td>{{row.ThirdQuarter}}</td>
+                  <td>{{row.FourthQuarter}}</td>
+                  <td>{{row.Total}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+        </div>
+        <div class="row">
+          <div class="col-md-3 text-start">
+            <b>Specific Notes:</b>
+          </div>
+          <div class="col-md-9 text-start">
+            {{this.currentReport.SpecificNotes}}
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <hr />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-3 text-start">
+            <b>Challenges:</b>
+          </div>
+          <div class="col-md-9 text-start">
+            {{this.currentReport.Challenges}}
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <hr />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-3 text-start mb-5">
+            <b>Heads Up:</b>
+          </div>
+          <div class="col-md-9 text-start">
+            {{this.currentReport.HeadsUp}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-1"></div>
+</div>
+
+

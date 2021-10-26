@@ -1,0 +1,31 @@
+
+<div class="title-bg">
+  <div><img src="../assets/logo.png" /><span class="strikeForceTitle">OCDETF Strike Force Quarterly Report Portal {{ !currentUser.StrikeForceName? "" :"-"  }} {{ currentUser.StrikeForceName }}</span></div>
+  
+</div>
+<div class="wrap strike-nav-bar" *ngIf="currentUser.IsAuthenticated">
+  <ul>
+    <li><a class="nav-link" aria-current="page" routerLink="/home"><i class="fas fa-home"></i>&nbsp; Home </a></li>
+    <li><a class="nav-link" aria-current="page" routerLink="/myreports"> <i class="far fa-file-alt"></i>&nbsp; My Reports </a></li>
+    <li><a *ngIf="currentUser.Administrator" class="nav-link" aria-current="page" routerLink="/admin"><i *ngIf="currentUser.Administrator" class="fas fa-user-shield"></i>&nbsp; Admin</a></li>
+    <li><a *ngIf="currentUser.Administrator" class="nav-link" aria-current="page" routerLink="/analysis"><i *ngIf="currentUser.Administrator" class="fas fa-chart-line"></i>&nbsp; Analysis</a></li>
+    <li><a class="nav-link" aria-current="page" routerLink="/announcements"><i class="fas fa-bullhorn"></i>&nbsp; Anouncements</a></li>
+    <li><a class="nav-link" aria-current="page" (click)="logout()"><i class="fas fa-sign-out-alt"></i>&nbsp; Logout</a></li>
+    <li class=" nav-link" style="float:right; vertical-align:middle;">
+      <span *ngIf="showProgress" class="spinner-border" role="status">
+        <span class="visually-hidden ">Loading...</span>
+      </span>
+      Welcome {{ currentUser.FirstName }} {{ currentUser.LastName }}!
+    </li>
+  </ul>
+</div>
+
+
+<div class="container-fluid">  
+      <router-outlet>
+
+      </router-outlet>
+</div>
+
+
+

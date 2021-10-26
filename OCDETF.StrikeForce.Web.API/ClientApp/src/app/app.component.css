@@ -1,0 +1,63 @@
+img {
+  height: 130px;
+  width: 130px;
+}
+
+.draw-line {
+  border-bottom: 1px solid black;
+}
+
+.img-thumbnail {
+  height: 150px;
+  width: 150px;
+}
+
+.input-box {
+  height: 200px;
+}
+
+body {
+  background: #adadb1;
+}
+
+.title {
+  text-transform: capitalize;
+  font-size: 18px;
+  margin: 0;
+}
+
+.strike-nav-bar {
+  background-color: #ab2424;
+  height: 50px;
+}
+
+.wrap {
+  margin-bottom: 30px;
+}
+
+.nav-link {
+  color: white;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+li {
+  float: left;
+}
+
+li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+  li a:hover:not(.active) {
+    background-color: #111;
+  }

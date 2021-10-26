@@ -1,0 +1,75 @@
+<div class="card ">
+  <div class="section-header required-label">Staffings</div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-12">
+        [Please review and update, if necessary, the staffing chart below. TFOs should be counted by whatever agency has sworn them in. The “Other Column” is for positions such as Investigative Assistant, Administrative Support, FBI’s OST and SOS positions. If your Strike Force has other federal or DOD agencies (ie: CBP, National Guard, NCIS, etc), please add them to the bottom of the chart so we can see those specific counts. Contractors are to be counted under State/Local (ie: FSA, 5 Stone Intelligence, Maximus, etc).
+        If appropriate, provide a narrative description of significant changes in personnel, staffing, expansion etc.]
+      </div>
+    </div>
+    <table class="table table-sm table-striped mt-3">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Agency</th>
+          <th scope="col"># Agents</th>
+          <th scope="col"># Federal Agency TFOs</th>
+          <th scope="col"># Analysts</th>
+          <th scope="col"># Other</th>
+          <th scope="col"> Total for Agency</th>
+          <th scope="col">Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let row of this.currentReport.StaffingData">
+          <td><b>{{row.Order}}</b></td>
+          <td> {{row.AgencyName}}</td>
+          <td><input class="staffing-data-box" align="right" [(ngModel)]="row.NumberOfAgents" (blur)="onBlur(row)" type="number" /></td>
+          <td><input class="staffing-data-box" [(ngModel)]="row.NumberOfFederalTFOs" (blur)="onBlur(row)" type="number" /></td>
+          <td><input class="staffing-data-box" [(ngModel)]="row.NumberOfAnalysts" (blur)="onBlur(row)" type="number" /></td>
+          <td><input class="staffing-data-box" [(ngModel)]="row.OtherNumbers" (blur)="onBlur(row)" type="number" /></td>
+          <td><input class="staffing-data-box total-input-box" [(ngModel)]="row.Total" type="number" readonly /></td>
+          <td><button type="button" class="btn btn-link" *ngIf="!row.IsCommon" (click)="deleteItem(row)"><i class="fas fa-trash-alt"></i></button></td>
+        </tr>
+        <tr *ngIf="!this.currentReport.StaffingData || this.currentReport.StaffingData.length>0">
+          <td></td>
+          <td> <b>Total:</b></td>
+          <td><b><input class="staffing-data-box total-input-box" [(ngModel)]="totalAgents" type="number" readonly /></b></td>
+          <td><b><input class="staffing-data-box total-input-box" [(ngModel)]="totalFederal" type="number" readonly /></b></td>
+          <td><b><input class="staffing-data-box total-input-box" [(ngModel)]="totalAnalysts" type="number" readonly /></b></td>
+          <td><b><input class="staffing-data-box total-input-box" [(ngModel)]="totalOther" type="number" readonly /></b></td>
+          <td><b><input class="staffing-data-box total-input-box" [(ngModel)]="totalAgency" type="number" readonly /></b></td>
+          <td></td>
+          <td></td>
+        </tr>
+
+        <tr *ngIf="!this.currentReport.StaffingData || this.currentReport.StaffingData.length==0">
+          <td colspan="5">
+            No Staffing Data to display!
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="row mt-3">
+      <div class="col-md-12">
+        <div class="col-md-12 text-end">
+          New Agency Name: &nbsp;&nbsp;<input [(ngModel)]="newActivityName" type="text" />&nbsp;&nbsp;<button type="button" class="btn btn-primary" (click)="addNew()"><i class="fas fa-plus"></i> Add</button>
+        </div>
+      </div>
+      <div class="row mt-3">
+        <div class="col-md-12">
+          <hr />
+          Notes:
+        </div>
+      </div>
+      <div class="row mt-3">
+        <div class="col-md-12">
+          <ckeditor [(ngModel)]="currentReport.SpecificNotes" [config]="{ height: '400px' }"></ckeditor>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+

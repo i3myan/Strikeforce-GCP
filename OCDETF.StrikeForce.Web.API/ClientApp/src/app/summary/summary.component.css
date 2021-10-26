@@ -1,0 +1,50 @@
+table {
+  width: 100%;
+
+}
+
+th.mat-sort-header-sorted {
+  color: black;
+}
+.example-container {
+  height: 100%;
+
+  max-width: 100%;
+  overflow: auto;
+}
+
+.mat-row:nth-child(even) {
+  background-color: lightgray;
+}
+
+.mat-row:nth-child(odd) {
+  background-color: white;
+}
+
+.mat-header-cell {
+  color: black;
+  font-weight: bold;
+  font-size: 14px;
+
+  border-right: 1px solid grey;
+  border-bottom: 1px solid grey;
+  text-align: center;
+  padding:5px;
+}
+
+.mat-cell{
+    border-right:1px solid grey;
+    border-bottom:1px solid grey;
+    text-align:center;
+    padding:5px;
+}
+
+
+.mat-column-ActivityName{
+    text-align:left;
+    width:350px;
+}
+
+.mat-column-Total {
+  text-align: right;
+}

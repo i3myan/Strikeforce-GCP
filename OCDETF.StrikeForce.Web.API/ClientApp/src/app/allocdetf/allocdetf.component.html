@@ -1,0 +1,40 @@
+<div class="card">
+  <div class="section-header required-label">Required Information (OCDETF and non-OCDETF cases)</div>
+  <div class="card-body">
+    <table class="table table-sm table-striped mb-5">
+      <thead>
+        <tr>
+          <th scope="col"># </th>
+          <th scope="col"> </th>
+          <th scope="col"><a class="link-dark" (click)="clickQuarter('1')"><b>1st Quarter</b></a></th>
+          <th scope="col"><a class="link-dark" (click)="clickQuarter('2')"><b>2nd Quarter</b></a></th>
+          <th scope="col"><a class="link-dark" (click)="clickQuarter('3')"><b>3rd Quarter</b></a></th>
+          <th scope="col"><a class="link-dark" (click)="clickQuarter('4')"><b>4th Quarter</b></a></th>
+          <th scope="col">Total</th>
+
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let row of this.currentReport.RequiredData">
+          <td><b>{{row.Order}}</b></td>
+          <td>{{row.ActivityName}}</td>
+          <td><input class="staffing-data-box" [disabled]="unlockQ1" [(ngModel)]="row.FirstQuarter" (blur)="onBlur(row)" /></td>
+          <td><input class="staffing-data-box" [disabled]="unlockQ2" [(ngModel)]="row.SecondQuarter" (blur)="onBlur(row)" /></td>
+          <td><input class="staffing-data-box" [disabled]="unlockQ3" [(ngModel)]="row.ThirdQuarter" (blur)="onBlur(row)" /></td>
+          <td><input class="staffing-data-box" [disabled]="unlockQ4" [(ngModel)]="row.FourthQuarter" (blur)="onBlur(row)" /></td>
+          <td><input class="staffing-data-box total-input-box" [(ngModel)]="row.Total" readonly /></td>
+
+        </tr>
+      </tbody>
+    </table>
+    <div class="row mt-2">
+      <div class="col-md-6 text-start">
+        <button *ngIf="currentUser.Administrator" type="button" class="btn btn-primary" (click)="unlock()"><i *ngIf="lockQtr" class="fas fa-unlock"></i><i *ngIf="!lockQtr" class="fas fa-lock"></i> Lock/Unlock</button>
+      </div>
+      <div class="col-md-6 text-end">
+
+      </div>
+    </div>
+  </div>
+  
+</div>

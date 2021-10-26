@@ -1,0 +1,121 @@
+<div class="row">
+  <div class="col-md-6 text-start text-dark quarterlyTitle">
+    {{currentReport.Name}} (FY {{currentReport.FiscalYear}} - Q{{currentReport.Quarter}}) - {{currentReport.StrikeForceName}}
+  </div>
+  <div class="col-md-6 text-end text-primary">
+    <button type="button" class="btn btn-primary" (click)="printPreview()"><i class="fas fa-print"></i> Print Preview </button>&nbsp;&nbsp;&nbsp;
+    <!--<button type="button" class="btn btn-primary" (click)="openModal(template)"><i class="fas fa-check"></i> Validate </button>&nbsp;&nbsp;&nbsp;-->
+    <button type="button" class="btn btn-primary" (click)="saveReport()"><i class="fas fa-save"></i> Save Report</button>&nbsp;&nbsp;&nbsp;
+    <button type="button" (click)="previousStep()" class="btn btn-dark"><i class="fas fa-arrow-left"></i> Previous</button>&nbsp;&nbsp;&nbsp;
+    <button type="button" class="btn btn-dark" (click)="nextStep()"><i class="fas fa-arrow-right"></i> Next</button>
+  </div>
+</div>
+<hr class="hr-bg" />
+<div class="row mt-1">
+  <div class="col-md-4 col-lg-2">
+    <div class="row ">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header text-white bg-secondary">Section(s)</div>
+          <div class="card-body">
+            <ul class="list-group">
+              <li class="list-group-item"><a routerLink="/quarterly/{{ reportID }}/history" (click)="clickLink(11)">History</a>&nbsp;&nbsp;<i *ngIf="linkID==11" class="fas fa-angle-double-right"></i></li>
+              <li class="list-group-item"><a routerLink="/quarterly/{{ reportID }}/mission" (click)="clickLink(12)">Mission Statement</a>&nbsp;&nbsp;<i *ngIf="linkID==12" class="fas fa-angle-double-right"></i></li>
+              <li class="list-group-item"><a routerLink="/quarterly/{{ reportID }}/structure" (click)="clickLink(13)">Structure</a>&nbsp;&nbsp;<i *ngIf="linkID==13" class="fas fa-angle-double-right"></i></li>
+              <li class="list-group-item"><a routerLink="/quarterly/{{ reportID }}/locations" (click)="clickLink(14)">Office Locations</a>&nbsp;&nbsp;<i *ngIf="linkID==14" class="fas fa-angle-double-right"></i></li>
+              <li class="list-group-item"><a routerLink="/quarterly/{{ reportID }}/staffings" (click)="clickLink(15)">Staffings</a> &nbsp;&nbsp;<i *ngIf="linkID==15" class="fas fa-angle-double-right"></i></li>
+              <li class="list-group-item"><a routerLink="/quarterly/{{ reportID }}/allocdetf" (click)="clickLink(16)">Required Information </a> &nbsp;&nbsp;<i *ngIf="linkID==16" class="fas fa-angle-double-right"></i></li>
+              <li class="list-group-item"><a routerLink="/quarterly/{{ reportID }}/ocdetfonly" (click)="clickLink(17)">OCDETF Case(s) Only</a>&nbsp;&nbsp; <i *ngIf="linkID==17" class="fas fa-angle-double-right"></i></li>
+              <li class="list-group-item"><a routerLink="/quarterly/{{ reportID }}/seizures" (click)="clickLink(18)">Seizures</a>&nbsp;&nbsp; <i *ngIf="linkID==18" class="fas fa-angle-double-right"></i></li>
+              <li class="list-group-item"><a routerLink="/quarterly/{{ reportID }}/specific" (click)="clickLink(19)">Specific Information</a>&nbsp;&nbsp; <i *ngIf="linkID==19" class="fas fa-angle-double-right"></i></li>
+              <li class="list-group-item"><a routerLink="/quarterly/{{ reportID }}/challenges" (click)="clickLink(20)">Challenges</a>&nbsp;&nbsp; <i *ngIf="linkID==20" class="fas fa-angle-double-right"></i></li>
+              <li class="list-group-item"><a routerLink="/quarterly/{{ reportID }}/recent" (click)="clickLink(21)">Recent Case Developments </a>&nbsp;&nbsp; <i *ngIf="linkID==21" class="fas fa-angle-double-right"></i></li>
+              <li class="list-group-item"><a routerLink="/quarterly/{{ reportID }}/headsup" (click)="clickLink(22)">Heads Up</a>&nbsp;&nbsp; <i *ngIf="linkID==22" class="fas fa-angle-double-right"></i></li>
+            </ul>
+            <div class="row">
+              <div class="col-md-12 mt-3 text-end">
+                <!--<button  type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fas fa-arrow-right"></i> Submit Report</button>-->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row mt-3">
+      <div class="col-md-12 text-end">
+
+      </div>
+
+    </div>
+  </div>
+  <div class="col-md-8 col-lg-10">
+    <div class="row">
+      <div class="col-md-12">
+        <router-outlet>
+
+        </router-outlet>
+      </div>
+    </div>
+    <div class="row mt-3" *ngIf="linkID !=0 && linkID != 1">
+      <div class="col-md-6 text-start">
+        
+      </div>
+      <div class="col-md-6 text-end mb-3">
+              </div>
+    </div>
+  </div>
+</div>
+
+<!-- Button trigger modal -->
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog ">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Confirm</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body ">
+        Do you wish to continue?
+        <br /><br />
+        Note: Please "Save Report" before submission.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="submitReport()">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #template>
+  
+  <div class="modal-header">
+    <h4 class="quarterlyTitle ">Validation Result</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body validation-result">
+    <table class="table table-wrap table-sm table-striped mt-3">
+      <thead>
+        <tr>
+
+          <th scope="col">Section</th>
+          <th scope="col">Error Message</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let row of validation">
+          <td>{{row.Category}}</td>
+          <td>{{row.Message}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="modal-footer">    
+    <button type="button" class="btn btn-dark" (click)="modalRef.hide()"><i class="fas fa-times-circle"></i> Close</button>
+  </div>
+</ng-template>

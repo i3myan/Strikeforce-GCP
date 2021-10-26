@@ -1,0 +1,71 @@
+<div class="row">
+  <div class="col-md-4">
+    <div class="card">
+      <h4 class="card-header text-white bg-secondary">My Information</h4>
+      <div class="card-body">
+        <p class="card-text"><b>UserName:</b> {{currentUser.Email}}</p>
+        <p class="card-text"><b>Strike Force Location:</b> {{currentUser.StrikeForceName}}</p>
+        <p><b>Roles:</b> {{ (currentUser.Administrator) ? "Admin ": ""}}{{(currentUser.Owner) ? "Owner ": "" }}{{(currentUser.Contributor) ? "Contributor ": "" }}</p>
+        <p class="card-text"><b>Last Login Date:</b> {{ currentUser.LastLoginDate | date:'medium' }}</p>
+        <p class="card-text"><b>Last Login IP Address:</b> {{ currentUser.LastLoginIPAddress }}</p>
+        <hr />
+        <p class="card-text"><b>Version:</b> 1.0.0.0 </p>
+        <p class="card-text"><b>Deploy Date:</b> 06/17/2021 </p>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="card">
+      <h4 class="card-header  text-white bg-secondary">Announcements</h4>
+      <div class="card-body">
+        <ul>
+          <li>Next version scheduled to deploy on Sept 10th 2021</li>
+          <li>...</li>
+          <li>...</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-8">
+    <div class="card mt-3">
+      <h4 class="card-header text-white bg-secondary">My Quarterly Reports</h4>
+      <div class="card-body">
+        <table class="table table-sm table-striped">
+          <thead>
+            <tr>
+              <th scope="col">Report Name </th>
+              <th scope="col">Strike Force </th>
+              <th scope="col">Fiscal Year</th>
+              <th scope="col">Quarter</th>
+              <th scope="col">View</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let row of this.myQuarterlyReports">
+              <td>{{row.Name}}</td>
+              <td>{{row.StrikeForceName}}</td>
+              <td>{{row.FiscalYear}}</td>
+              <td>{{row.Quarter}}</td>
+              <td>
+                <button type="button" class="btn btn-link" (click)="viewReport(row)">View</button>
+              </td>
+
+            </tr>
+            <tr *ngIf="!this.myQuarterlyReports || this.myQuarterlyReports.length==0">
+              <td colspan="5">
+                No Reports to display!
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+

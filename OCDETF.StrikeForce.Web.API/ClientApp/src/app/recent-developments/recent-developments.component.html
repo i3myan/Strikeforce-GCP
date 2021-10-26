@@ -1,0 +1,103 @@
+<div class="card">
+  <div class="section-header required-label">
+    Recent Case Developments
+  </div>
+
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-12">
+        For the purposes of this report, please provide the OCDETF name and case number. If it is a non-OCDETF case, please identify which agency is sponsoring the case along with case name and number.<br /><br />
+        [Examples]
+        OCDETF Operation Winter Is Here / SK-WF-0001<br />
+        DEA Strike Force Group One<br />
+        Brief summary of what has taken place in the investigation during this quarter.<br /><br />
+      </div>
+    </div>
+    <div class="row mt-3">
+      <div class="col-md-3 col-lg-2 ">
+        <label for="inputCaseType" class="col-form-label required-label">Case Type:</label>
+      </div>      
+      <div class="col-md-3">
+        <select id="inputCaseType" class="form-select" aria-label="Select Case Type" [(ngModel)]="newRecentCase.CaseType">          
+          <option selected value="OCDETF">OCDETF</option>
+          <option value="Non-OCDETF">Non-OCDETF</option>
+        </select>
+      </div>
+    </div>
+    <div class="row mt-3">
+      <div class="col-md-3 col-lg-2 ">
+        <label for="inputAgencyName" class="col-form-label required-label">Name/Case Number:</label>
+      </div>      
+      <div class="col-md-6">
+        <input type="text" class="form-control" id="inputAgencyName" [(ngModel)]="newRecentCase.AgencyName">
+      </div>
+    </div>
+    <div class="row mt-3">
+      <div class="col-md-3 col-lg-2 ">
+        <label for="inputSponsorAgency" class="col-form-label required-label">Sponsoring Agency/Other:</label>
+      </div>      
+      <div class="col-md-6">
+        <input type="text" class="form-control" id="inputSponsorAgency" [(ngModel)]="newRecentCase.SponsorAgency">
+      </div>
+    </div>
+    <div class="row mt-3">
+      <div class="col-md-3 col-lg-2 ">
+        <label for="inputSummary" class="col-form-label required-label">Brief Summary:</label>
+      </div>      
+      <div class="col-md-8 col-lg-10">
+        <textarea class="form-control" id="inputSummary" rows="5" cols="100" maxlength="{{summaryMaxLength}}" [(ngModel)]="newRecentCase.Summary"></textarea>
+        <p class="mt-1">{{summaryMaxLength - newRecentCase.Summary.length}} characters remaining.</p>
+      </div>
+    </div>
+    <div class="row mt-3">
+      <div class="col-md-12 text-end">
+        <button type="submit" class="btn btn-primary" (click)="addNew()"><i class="fas fa-save"></i> Add/Update Recent Case</button>
+      </div>
+    </div>
+    <div class="row mt-3">
+      <div class="col-md-12 ">
+        <table class="table table-sm table-striped mb-5">
+          <thead>
+            <tr>
+              <th scope="col"># </th>
+              <th scope="col" style="width:25%;">Case</th>
+              <th scope="col">Summary</th>
+              <th scope="col">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let row of this.currentReport.RecentDevelopments">
+              <td>{{row.Order}}</td>
+              <td><b>{{row.CaseType}}</b><br /> {{row.AgencyName}} <br />{{row.SponsorAgency}}</td>
+              <td>{{row.Summary}}</td>              
+              <td>
+                <button type="button" class="btn btn-link-danger" (click)="openModal(row, template)"><i class="fas fa-trash-alt"></i></button> &nbsp;&nbsp;
+                <button type="button" class="btn btn-link" (click)="editItem(row)"><i class="fas fa-edit"></i></button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #template>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Confirm Delete</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    Do you wish to continue deleting {{ this.deleteRow.CaseType }} - {{ this.deleteRow.AgencyName }}?
+    <br /><br />        
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-danger" (click)="confirmDelete()"><i class="fas fa-trash-alt"></i> Delete</button>&nbsp;&nbsp;
+    <button type="button" class="btn btn-dark" (click)="modalRef.hide()"><i class="fas fa-times-circle"></i> Close</button>
+  </div>
+</ng-template>
+
+
+

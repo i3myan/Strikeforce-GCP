@@ -1,0 +1,18 @@
+<div class="card">
+  <div class="section-header"><label class="required-label">Heads Up</label></div>
+
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-12">
+        Please give us a brief heads up on any anticipated operational developments (e.g., upcoming takedowns or arrests) or significant new investigative techniques or initiatives (NOT for further dissemination by us, but for informational purposes only).  [Use as much space as necessary.]
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12 mt-3">
+        <ckeditor [(ngModel)]="currentReport.HeadsUp" [config]="{ height: '400px' }"></ckeditor>
+      </div>
+    </div>
+
+    <!--<ckeditor [(ngModel)]="currentReport.Notes" [config]="{ height: '400px' }"></ckeditor>-->
+  </div>
+</div>

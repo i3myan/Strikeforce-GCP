@@ -1,0 +1,160 @@
+<div class="row mt-3">
+  <div class="col-md-2"></div>
+  <div class="col-md-8">
+
+    <div class="card">
+        <h4 class="card-header text-white bg-secondary">Administration</h4>
+        <div class="card-body">
+          <nav>
+            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+              <button class="nav-link active" id="nav-users-tab" data-bs-toggle="tab" data-bs-target="#nav-users" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Users</button>
+              <button class="nav-link" id="nav-add-user-tab" data-bs-toggle="tab" data-bs-target="#nav-add-user" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Add/Edit User</button>
+              <button class="nav-link" id="nav-strike-tab" data-bs-toggle="tab" data-bs-target="#nav-strike-force" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Strike Force(s)</button>
+            </div>
+          </nav>
+          <div class="tab-content" id="nav-tabContent">
+            <div class="tab-pane fade show active" id="nav-users" role="tabpanel" aria-labelledby="nav-users-tab">
+              <div class="card mt-3">
+                <h5 class="card-header">All Users</h5>
+                <div class="card-body">
+                  <table class="table table-sm table-striped">
+                    <thead>
+                      <tr>
+                        <th scope="col">Full Name </th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Strike Force Name</th>
+                        <th scope="col">Role(s)</th>
+                        <th scope="col">Action(s)</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let row of this.allUsers">
+                        <td>{{row.FirstName }} {{ row.LastName}}</td>
+                        <td>{{row.Email}}</td>
+                        <td>{{row.StrikeForceID}}</td>
+                        <td>{{ (row.Administrator) ? "Admin ": ""}}{{(row.Owner) ? "Owner ": "" }}{{(row.Contributor) ? "Contributor ": "" }}</td>
+                        <td>
+                          <button type="button" class="btn btn-link">Edit/Delete</button>
+                        </td>
+
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+            <div class="tab-pane fade" id="nav-add-user" role="tabpanel" aria-labelledby="nav-add-user-tab">
+              <div class="card mt-3">
+                <div class="card-header ">
+                  Admin - Add/Edit User
+                </div>
+                <div class="card-body">
+                  <div class="row mt-3">
+                    <label for="inputEmail" class="col-md-3 col-lg-2 col-form-label  required-label">First Name:</label>
+                    <div class="col-md-8">
+                      <input type="text" class="form-control" id="inputName" [(ngModel)]="newUser.FirstName" [focusMe]="true">
+                    </div>
+                  </div>
+                  <div class="row mt-3">
+                    <label for="inputEmail" class="col-md-3 col-lg-2 col-form-label  required-label">Last Name:</label>
+                    <div class="col-md-8">
+                      <input type="text" class="form-control" id="inputName" [(ngModel)]="newUser.LastName">
+                    </div>
+                  </div>
+                  <div class="row mt-3">
+                    <label for="inputEmail" class="col-md-3 col-lg-2 col-form-label  required-label">Email:</label>
+                    <div class="col-md-8">
+                      <input type="text" class="form-control" id="inputEmail" [(ngModel)]="newUser.Email">
+                    </div>
+                  </div>
+                  <div class="row mt-3">
+                    <label for="inputPassword" class="col-md-3 col-lg-2 col-form-label  required-label">Password:</label>
+                    <div class="col-md-8">
+                      <input type="password" class="form-control" id="inputPassword" [(ngModel)]="newUser.Password">
+                    </div>
+                  </div>
+                  <div class="row mt-3">
+                    <label for="inputStrikeForceName" class="col-md-3 col-lg-2 col-form-label required-label">Strike Force Location:</label>
+                    <div class="col-md-8">
+                      <select class="form-select" id="inputStrikeForceName" [disabled]="strikeForceSelection" size="10" aria-label="" [(ngModel)]="newUser.StrikeForceID">
+                        <option *ngFor="let force of allForceNames" [value]="force.ID">{{force.Name}}</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="row mt-3">
+                    <label for="inputCaseDevelopmentNotes" class="col-md-3 col-lg-2 col-form-label  required-label">Roles:</label>
+                    <div class="col-md-8">
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="chkAdministrator" [(ngModel)]="newUser.Administrator">
+                        <label class="form-check-label" for="inlineCheckbox1">Admin</label>
+                      </div>
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="chkOwner" [(ngModel)]="newUser.Owner">
+                        <label class="form-check-label" for="inlineCheckbox2">Owner</label>
+                      </div>
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="chkContributor" [(ngModel)]="newUser.Contributor">
+                        <label class="form-check-label" for="inlineCheckbox3">Contributor</label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row mt-3">
+                    <label for="inputActive" class="col-md-3 col-lg-2 col-form-label"></label>
+                    <div class="col-md-8">
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="inputActive" [(ngModel)]="newUser.IsActive">
+                        <label class="form-check-label" for="inputActive">Active</label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row mt-3">
+                    <div class="col-md-12 text-end">
+                      <button type="submit" class="btn btn-primary" (click)="saveUser()"><i class="fas fa-save"></i> Save</button>&nbsp;&nbsp;
+                      <button type="submit" class="btn btn-danger" (click)="cancelUser()"><i class="fas fa-eraser"></i> Cancel</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+            <div class="tab-pane fade" id="nav-strike-force" role="tabpanel" aria-labelledby="nav-strike-tab">
+              <div class="card mt-3">
+                <div class="card-header">
+                  Strike Force(s)
+                </div>
+                <div class="card-body">
+                  <table class="table table-wrap table-sm table-striped mt-3">
+                    <thead>
+                      <tr>
+
+                        <th scope="col">Name</th>
+                        <th scope="col">Active</th>
+                        <th scope="col">Created Date</th>
+                        <th scope="col">Updated Date</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let row of this.allForceNames">
+
+                        <td>{{row.Name}}</td>
+                        <td>{{row.IsActive ? "Yes": "No"}}</td>
+                        <td>{{row.DateCreated | date:'medium' }}</td>
+                        <td>{{row.DateUpdated  | date:'medium' }}</td>
+
+                      </tr>
+                    </tbody>
+                  </table>
+
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+
+  </div>
+  <div class="col-md-2"></div>
+</div>

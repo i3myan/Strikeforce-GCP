@@ -1,0 +1,35 @@
+<div class="card">
+  <div class="section-header">OCDETF cases only (data supplied by OCDETF  Executive Office)*</div>
+
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-12">
+        The OCDETF Executive Office will supply this data to you at the end of each quarter. You do not need to report anything in this section.
+      </div>
+    </div>
+    <table class="table table-sm table-striped mt-3 mb-5">
+      <thead>
+        <tr>
+          <th scope="col"># </th>
+          <th scope="col"> </th>
+          <th scope="col">1st Quarter</th>
+          <th scope="col">2nd Quarter</th>
+          <th scope="col">3rd Quarter</th>
+          <th scope="col">4th Quarter</th>
+          <th scope="col">Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let row of currentReport.OCDETFCases">
+          <td><b>{{row.Order}}</b></td>
+          <td>{{row.ActivityName}}</td>
+          <td><input class="staffing-data-box" [disabled]="currentReport.Quarter != '1'" [(ngModel)]="row.FirstQuarter" (blur)="onBlur(row)"  type="text" readonly /></td>
+          <td><input class="staffing-data-box" [disabled]="currentReport.Quarter != '2'" [(ngModel)]="row.SecondQuarter" (blur)="onBlur(row)"  type="text" readonly /></td>
+          <td><input class="staffing-data-box" [disabled]="currentReport.Quarter != '3'" [(ngModel)]="row.ThirdQuarter" (blur)="onBlur(row)"  type="text" readonly /></td>
+          <td><input class="staffing-data-box" [disabled]="currentReport.Quarter != '4'" [(ngModel)]="row.FourthQuarter" (blur)="onBlur(row)"  type="text" readonly /></td>
+          <td><input class="staffing-data-box total-input-box" [(ngModel)]="row.Total" (blur)="onBlur(row)" readonly type="text" /></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

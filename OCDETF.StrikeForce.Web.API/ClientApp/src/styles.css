@@ -1,0 +1,70 @@
+/* You can add global styles to this file, and also import other style files */
+.notes-box {
+  min-height: 300px;
+}
+
+body {
+  background-color: #e2dcd6;
+}
+
+.staffing-data-box {
+  width: 90px;
+  height: 25px;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-size: 14px;
+  font-family: Roboto;
+}
+
+.table-wrapper {
+  max-height: 100px;
+  overflow: auto;
+  display: inline-block;
+}
+
+.total-input-box {
+}
+
+.section-header {
+  padding-left: 15px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  font-size: 24px;
+  font-weight: 500;
+  border-bottom: 1px solid black;
+}
+
+.title-bg {
+  background-image: url('assets/title-background.png');
+  background-size: contain;
+  height: 150px;
+  width: 100%;
+  padding: 10px 10px 10px 10px;
+  color: white;
+}
+
+.customAppBar {
+  background-color: #ab2424;
+}
+/* TEST*/
+.strikeForceTitle {
+  font-size: 24px;
+  font-display: block;
+  padding-left: 15px;
+}
+
+
+.btn {
+  font-size: 14px;
+}
+
+.required-label:after {
+  content: " *";
+  color: red;
+}
